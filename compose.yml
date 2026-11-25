@@ -1,0 +1,18 @@
+services:
+  web:
+    image: ${PINHOLE_IMAGE:?Set PINHOLE_IMAGE}
+    container_name: ${PINHOLE_CONTAINER:?Set PINHOLE_CONTAINER}
+    restart: unless-stopped
+
+    ports:
+      - "${PINHOLE_PORT:?Set PINHOLE_PORT}:80"
+
+    networks:
+      proxy:
+        aliases:
+          - ${PINHOLE_CONTAINER}
+
+networks:
+  proxy:
+    external: true
+    name: ${NPM_NETWORK:?Set NPM_NETWORK}
