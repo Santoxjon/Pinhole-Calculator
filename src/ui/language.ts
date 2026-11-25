@@ -8,7 +8,7 @@ import {
   type TranslationKey,
 } from '../i18n';
 import { readStorage, writeStorage } from '../platform/storage';
-import { closeDialog } from './dialog';
+import { bindDialogBackdrop, closeDialog } from './dialog';
 
 export function createLanguagePicker(onChange: (language: Language) => void) {
   const storageKey = 'pinhole-language';
@@ -97,6 +97,9 @@ export function createLanguagePicker(onChange: (language: Language) => void) {
   languageButton.addEventListener('click', openLanguageDialog);
   closeButton.addEventListener('click', () => {
     void closeLanguageDialog();
+  });
+  bindDialogBackdrop(dialog, () => {
+    if (hasSelection) void closeLanguageDialog();
   });
   dialog.addEventListener('cancel', (event) => {
     event.preventDefault();

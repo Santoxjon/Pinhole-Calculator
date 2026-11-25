@@ -7,6 +7,13 @@ export const es: Translation = {
   paper: 'Papel ISO 6',
   cameraAperture: 'Diafragma: número f',
   cameraHelp: 'Introduce el número f de tu estenopeica, por ejemplo 180.',
+  pinholeCalculate: 'Calcula tu número f',
+  pinholeDiameter: 'Diámetro del orificio (mm)',
+  pinholeDistance: 'Distancia del orificio al papel (mm)',
+  pinholeDistanceRange: 'Introduce una distancia entre 30 y 300 mm.',
+  pinholeEquation: 'Número f = distancia al papel ÷ diámetro del orificio',
+  backButton: 'Volver',
+  continueButton: 'Continuar',
   meter: 'Lectura del fotómetro',
   description:
     'Introduce los ajustes que dan una exposición correcta en tu fotómetro o cámara. Por ejemplo: ISO 100, f/16, 1/60.',

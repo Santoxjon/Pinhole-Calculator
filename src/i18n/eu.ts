@@ -8,6 +8,13 @@ export const eu: Translation = {
   cameraAperture: 'Diafragma: f zenbakia',
   cameraHelp:
     'Zure estenopeikaren diafragmaren f zenbakia sartu, adibidez 180.',
+  pinholeCalculate: 'Kalkulatu zure f zenbakia',
+  pinholeDiameter: 'Zuloaren diametroa (mm)',
+  pinholeDistance: 'Zulotik paperera dagoen distantzia (mm)',
+  pinholeDistanceRange: 'Sartu 30 eta 300 mm arteko distantzia.',
+  pinholeEquation: 'f zenbakia = papererainoko distantzia ÷ zuloaren diametroa',
+  backButton: 'Itzuli',
+  continueButton: 'Jarraitu',
   meter: 'Fotometroaren irakurketa',
   description:
     'Adierazi itzazu zure fotometro edo kameran ageri diren ezarpenak. Adibidez: ISO 100, f/16, 1/60.',

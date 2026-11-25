@@ -1,10 +1,17 @@
 export const en = {
   title: 'Pinhole',
-  subtitle: 'Speed calculator',
+  subtitle: 'Shutter speed calculator',
   camera: 'Your pinhole camera',
   paper: 'ISO 6 paper',
   cameraAperture: 'Aperture · f-number',
   cameraHelp: 'Enter the number on your camera, for example 180.',
+  pinholeCalculate: 'Calculate your pinhole f',
+  pinholeDiameter: 'Pinhole diameter (mm)',
+  pinholeDistance: 'Distance from pinhole to paper (mm)',
+  pinholeDistanceRange: 'Enter a distance between 30 and 300 mm.',
+  pinholeEquation: 'f-number = distance to paper ÷ pinhole diameter',
+  backButton: 'Back',
+  continueButton: 'Continue',
   meter: 'Your light-meter reading',
   description:
     'Use the settings that give a correct exposure on your meter or digital camera.',

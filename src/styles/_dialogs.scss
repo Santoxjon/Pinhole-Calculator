@@ -1,4 +1,5 @@
 #language-dialog,
+#pinhole-dialog,
 #formula-dialog {
   margin: auto;
   width: min(400px, calc(100% - 2rem));
@@ -77,8 +78,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :is(#language-dialog, #formula-dialog)[open],
-  :is(#language-dialog, #formula-dialog)[open]::backdrop {
+  :is(#language-dialog, #formula-dialog, #pinhole-dialog)[open],
+  :is(#language-dialog, #formula-dialog, #pinhole-dialog)[open]::backdrop {
     animation: none;
   }
 }
@@ -194,4 +195,70 @@
 #close-language {
   margin-top: 1rem;
   width: 100%;
+}
+
+.pinhole-help {
+  display: inline;
+  color: #8e302a;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+#pinhole-dialog {
+  &,
+  * {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+  #pinhole-title:focus {
+    outline: none;
+  }
+  .field {
+    margin-top: 1.25rem;
+  }
+  input[type='range'] {
+    width: 100%;
+    accent-color: #8e302a;
+  }
+  .slider-limits {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+  }
+  #pinhole-diameter-value {
+    font-size: 1.125rem;
+  }
+  #pinhole-result {
+    display: block;
+    margin-top: 1.5rem;
+    color: #8e302a;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  #pinhole-continue {
+    width: 100%;
+    margin: 1.25rem 0 0.75rem;
+    background: #b43d35;
+    border-color: #b43d35;
+    color: #fff8e9;
+
+    &:hover:not(:disabled) {
+      background: #8e302a;
+      border-color: #8e302a;
+    }
+  }
+  #close-pinhole {
+    width: 100%;
+    border-color: #b43d35;
+    color: #b43d35;
+  }
+  #pinhole-continue:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }

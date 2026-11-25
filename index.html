@@ -46,8 +46,21 @@
               placeholder="180"
               required
             />
-            <p class="help" data-i18n="cameraHelp">
-              Enter the number on your camera, for example 180.
+            <p class="help">
+              <span data-i18n="cameraHelp"
+                >Enter the number on your camera, for example 180.</span
+              >
+              <a
+                id="pinhole-help"
+                class="pinhole-help"
+                href="#pinhole-dialog"
+                role="button"
+                aria-haspopup="dialog"
+                aria-controls="pinhole-dialog"
+                data-i18n="pinholeCalculate"
+              >
+                Calculate your pinhole f-number
+              </a>
             </p>
           </section>
           <section class="box" aria-labelledby="meter-title">
@@ -148,6 +161,86 @@
           Close
         </button>
       </div>
+    </dialog>
+    <dialog id="pinhole-dialog" aria-labelledby="pinhole-title">
+      <form id="pinhole-form">
+        <h2
+          id="pinhole-title"
+          class="title is-5"
+          data-i18n="pinholeCalculate"
+          tabindex="-1"
+          autofocus
+        ></h2>
+        <div class="field">
+          <label
+            class="label"
+            for="pinhole-diameter"
+            data-i18n="pinholeDiameter"
+          ></label>
+          <output id="pinhole-diameter-value" for="pinhole-diameter"></output>
+          <input
+            id="pinhole-diameter"
+            type="range"
+            min="0.1"
+            max="0.5"
+            step="0.01"
+            value="0.35"
+          />
+          <div class="slider-limits">
+            <span>0.1 mm</span><span>0.5 mm</span>
+          </div>
+        </div>
+        <div class="field">
+          <label
+            class="label"
+            for="pinhole-distance"
+            data-i18n="pinholeDistance"
+          ></label>
+          <input
+            id="pinhole-distance"
+            class="input"
+            type="number"
+            inputmode="decimal"
+            min="30"
+            max="300"
+            step="any"
+            required
+            aria-describedby="pinhole-distance-help"
+          />
+          <p
+            id="pinhole-distance-help"
+            class="help"
+            data-i18n="pinholeDistanceRange"
+          ></p>
+        </div>
+        <div id="pinhole-result-section" hidden>
+          <output
+            id="pinhole-result"
+            for="pinhole-diameter pinhole-distance"
+            aria-live="polite"
+            aria-atomic="true"
+          ></output>
+          <p data-i18n="pinholeEquation"></p>
+          <p id="pinhole-substitution"></p>
+        </div>
+        <button
+          id="pinhole-continue"
+          type="submit"
+          class="language-button"
+          data-i18n="continueButton"
+          disabled
+        >
+          Continue
+        </button>
+        <button
+          id="close-pinhole"
+          type="button"
+          class="language-button"
+          data-i18n="backButton"
+        >
+          Back
+        </button>
+      </form>
     </dialog>
     <script type="module" src="/src/main.ts"></script>
   </body>

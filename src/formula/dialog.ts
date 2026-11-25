@@ -1,7 +1,7 @@
 import { translations, type Language } from '../i18n';
 import type { ExposureSettings } from '../domain/exposure';
 import { requireElement } from '../ui/dom';
-import { closeDialog } from '../ui/dialog';
+import { bindDialogBackdrop, closeDialog } from '../ui/dialog';
 import {
   buildExample,
   GENERAL_MATHML,
@@ -26,6 +26,9 @@ export function createFormulaDialog() {
     requireElement<HTMLElement>('#formula-title').focus();
   });
   requireElement('#close-formula').addEventListener('click', () => {
+    void closeDialog(dialog, trigger);
+  });
+  bindDialogBackdrop(dialog, () => {
     void closeDialog(dialog, trigger);
   });
   dialog.addEventListener('cancel', (event) => {
