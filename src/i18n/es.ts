@@ -1,0 +1,44 @@
+import type { Translation } from './types';
+
+export const es: Translation = {
+  title: 'Estenopeica',
+  subtitle: 'Calculadora de exposición',
+  camera: 'Tu cámara estenopeica',
+  paper: 'Papel ISO 6',
+  cameraAperture: 'Diafragma: número f',
+  cameraHelp: 'Introduce el número f de tu estenopeica, por ejemplo 180.',
+  meter: 'Lectura del fotómetro',
+  description:
+    'Introduce los ajustes que dan una exposición correcta en tu fotómetro o cámara. Por ejemplo: ISO 100, f/16, 1/60.',
+  iso: 'ISO',
+  aperture: 'Apertura f',
+  shutter: 'Velocidad',
+  shutterShort: 'Velocidad',
+  result: 'TIEMPO DE EXPOSICIÓN',
+  formulaTitle: 'Cómo se calcula la exposición',
+  formulaIntro:
+    'Convertimos la lectura del fotómetro en una exposición equivalente para tu cámara estenopeica, usando papel ISO 6.',
+  formulaLegendTime: 'tiempo de exposición',
+  formulaLegendMeterTime: 'tiempo medido',
+  formulaLegendPinhole: 'f estenopeica',
+  formulaLegendMeterAperture: 'f medido',
+  formulaLegendMeterIso: 'ISO medido',
+  formulaLegendPaperIso: 'ISO 6 papel',
+  formulaExampleIntro: 'Con tus ajustes:',
+  formulaEquation:
+    'Tiempo = tiempo medido × (número f estenopeico ÷ número f medido)² × (ISO medido ÷ 6)',
+  formulaExplanation:
+    'El tiempo medido se expresa en segundos: 1/60 significa 1 ÷ 60 segundos. La relación entre aperturas se eleva al cuadrado porque la cantidad de luz depende del área del orificio. La relación entre valores ISO compensa la menor sensibilidad del papel.',
+  seconds: 'segundos',
+  secondUnit: 's',
+  minuteUnit: 'min',
+  hourUnit: 'h',
+  fillInputs: 'Rellena los campos para obtener el tiempo de exposición.',
+  apertureRange: 'Introduce una apertura del fotómetro entre 1 y 32.',
+  invalid: 'Introduce un número positivo en cada ajuste.',
+  range: 'Estos ajustes superan el rango de cálculo.',
+  changeLanguage: 'Cambiar idioma',
+  chooseLanguage: 'Elige tu idioma',
+  close: 'Cerrar',
+  meta: 'Una calculadora de exposición sencilla para fotografía estenopeica con papel ISO 6.',
+};
