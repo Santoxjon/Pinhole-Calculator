@@ -1,0 +1,52 @@
+import type { Translation } from './types';
+
+export const eu: Translation = {
+  title: 'Estenopeika',
+  subtitle: 'Esposizio-kalkulagailua',
+  camera: 'Zure estenopeika',
+  paper: 'ISO 6 papera',
+  cameraAperture: 'Diafragma: f zenbakia',
+  cameraHelp:
+    'Zure estenopeikaren diafragmaren f zenbakia sartu, adibidez 180.',
+  pinholeCalculate: 'Kalkulatu zure f zenbakia',
+  pinholeDiameter: 'Zuloaren diametroa (mm)',
+  pinholeDistance: 'Zulotik paperera dagoen distantzia (mm)',
+  pinholeDistanceRange: 'Sartu 30 eta 300 mm arteko distantzia.',
+  pinholeEquation: 'f zenbakia = papererainoko distantzia ÷ zuloaren diametroa',
+  backButton: 'Itzuli',
+  continueButton: 'Jarraitu',
+  meter: 'Fotometroaren irakurketa',
+  description:
+    'Adierazi itzazu zure fotometro edo kameran ageri diren ezarpenak. Adibidez: ISO 100, f/16, 1/60.',
+  iso: 'ISO',
+  aperture: 'Irekidura f',
+  shutter: 'Abiadura',
+  shutterShort: 'Abiadura',
+  result: 'ESPOSIZIO-DENBORA',
+  formulaTitle: 'Nola kalkulatzen da esposizioa?',
+  formulaIntro:
+    'Fotometroaren irakurketa zure kamera estenopeikorako esposizio baliokide bihurtzen dugu, ISO 6 papera erabiliz.',
+  formulaLegendTime: 'esposizio-denbora',
+  formulaLegendMeterTime: 'neurtutako denbora',
+  formulaLegendPinhole: 'f estenopeika',
+  formulaLegendMeterAperture: 'f neurtutakoa',
+  formulaLegendMeterIso: 'ISO neurtutakoa',
+  formulaLegendPaperIso: 'ISO 6 papera',
+  formulaExampleIntro: 'Zure ezarpenekin:',
+  formulaEquation:
+    'Denbora = neurtutako denbora × (estenopeikaren f zenbakia ÷ neurtutako f zenbakia)² × (neurtutako ISOa ÷ 6)',
+  formulaExplanation:
+    'Neurtutako denbora segundotan adierazten da: 1/60 balioak 1 ÷ 60 segundo esan nahi du. Irekiduren arteko erlazioa karratura berretzen da, argi kantitatea zuloaren azaleraren araberakoa delako. ISO balioen arteko erlazioak paperaren sentikortasun txikiagoa konpentsatzen du.',
+  seconds: 'segundo',
+  secondUnit: 's',
+  minuteUnit: 'min',
+  hourUnit: 'h',
+  fillInputs: 'Bete eremuak esposizio-denbora kalkulatzeko.',
+  apertureRange: 'Diafragmaren f zenbakiak 1 eta 32 artean egon behar du.',
+  invalid: 'Sartu zenbaki positibo bat ezarpen bakoitzean.',
+  range: 'Ezarpen hauek kalkulu-tartea gainditzen dute.',
+  changeLanguage: 'Hizkuntza aldatu',
+  chooseLanguage: 'Aukeratu zure hizkuntza',
+  close: 'Itxi',
+  meta: 'ISO 6 paperarekin argazki estenopeikoak egiteko esposizio-kalkulagailu erraza.',
+};

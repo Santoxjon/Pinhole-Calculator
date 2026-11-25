@@ -1,0 +1,14 @@
+@use 'bulma/sass/utilities' with (
+  $primary: #b43d35,
+  $family-primary: 'Inter, system-ui, sans-serif'
+);
+@use 'bulma/sass/base';
+@use 'bulma/sass/elements/box';
+@use 'bulma/sass/elements/title';
+@use 'bulma/sass/elements/tag';
+@use 'bulma/sass/form';
+@use 'bulma/sass/layout/section';
+@use 'bulma/sass/themes';
+
+@use './calculator';
+@use './dialogs';

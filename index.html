@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5ecd9" />
+    <meta
+      name="description"
+      content="A simple exposure calculator for ISO 6 pinhole photography."
+    />
+    <title>Pinhole Speed calculator</title>
+  </head>
+  <body>
+    <main class="section">
+      <div class="calculator">
+        <h1 class="calculator-title">
+          <span data-i18n="title">Pinhole</span>
+          <span data-i18n="subtitle">Speed calculator</span
+          ><button
+            id="change-language"
+            type="button"
+            class="language-button"
+            aria-haspopup="dialog"
+            aria-controls="language-dialog"
+          ></button>
+        </h1>
+        <form id="calculator" novalidate>
+          <section class="box" aria-labelledby="camera-title">
+            <div class="section-heading">
+              <h2 id="camera-title" class="title is-5" data-i18n="camera">
+                Your pinhole camera
+              </h2>
+              <span class="tag" data-i18n="paper">ISO 6 paper</span>
+            </div>
+            <label class="label" for="pinhole" data-i18n="cameraAperture"
+              >Aperture · f-number</label
+            >
+            <input
+              class="input is-medium"
+              id="pinhole"
+              name="pinhole"
+              type="number"
+              inputmode="decimal"
+              min="0.01"
+              step="any"
+              placeholder="180"
+              required
+            />
+            <p class="help">
+              <span data-i18n="cameraHelp"
+                >Enter the number on your camera, for example 180.</span
+              >
+              <a
+                id="pinhole-help"
+                class="pinhole-help"
+                href="#pinhole-dialog"
+                role="button"
+                aria-haspopup="dialog"
+                aria-controls="pinhole-dialog"
+                data-i18n="pinholeCalculate"
+              >
+                Calculate your pinhole f-number
+              </a>
+            </p>
+          </section>
+          <section class="box" aria-labelledby="meter-title">
+            <h2 id="meter-title" class="title is-5" data-i18n="meter">
+              Your light-meter reading
+            </h2>
+            <p class="meter-description" data-i18n="description">
+              Use the settings that give a correct exposure on your meter or
+              digital camera.
+            </p>
+            <div id="meter-fields"></div>
+          </section>
+        </form>
+        <section class="result" aria-labelledby="result-title">
+          <div class="result-heading">
+            <h2 id="result-title" class="eyebrow" data-i18n="result">
+              YOUR EXPOSURE TIME
+            </h2>
+            <button
+              id="formula-help"
+              type="button"
+              aria-haspopup="dialog"
+              aria-controls="formula-dialog"
+            >
+              ?
+            </button>
+          </div>
+          <output
+            id="exposure"
+            for="pinhole iso aperture shutter"
+            aria-live="polite"
+            aria-atomic="true"
+          ></output>
+          <p id="result-detail"></p>
+        </section>
+      </div>
+    </main>
+    <dialog id="language-dialog" aria-labelledby="language-title">
+      <h2 id="language-title" class="title is-5" tabindex="-1" autofocus>
+        Euskara · English · Español
+      </h2>
+      <p id="language-prompt">
+        Aukera ezazu zure hizkuntza Choose your language Elige tu idioma
+      </p>
+      <div id="language-options"></div>
+      <button id="close-language" type="button" class="language-button" hidden>
+        Close
+      </button>
+    </dialog>
+    <dialog id="formula-dialog" aria-labelledby="formula-title">
+      <div class="formula-dialog-content">
+        <h2
+          id="formula-title"
+          class="title is-5"
+          data-i18n="formulaTitle"
+          tabindex="-1"
+          autofocus
+        >
+          How the exposure is calculated
+        </h2>
+        <p data-i18n="formulaIntro"></p>
+        <div id="formula-equation" class="formula-equation"></div>
+        <div class="formula-legend">
+          <div>
+            <span class="formula-symbol">t:</span>
+            <span data-i18n="formulaLegendTime"></span>
+          </div>
+          <div>
+            <span class="formula-symbol">t<sub>m</sub>:</span>
+            <span data-i18n="formulaLegendMeterTime"></span>
+          </div>
+          <div>
+            <span class="formula-symbol">f<sub>e</sub>:</span>
+            <span data-i18n="formulaLegendPinhole"></span>
+          </div>
+          <div>
+            <span class="formula-symbol">f<sub>m</sub>:</span>
+            <span data-i18n="formulaLegendMeterAperture"></span>
+          </div>
+          <div>
+            <span class="formula-symbol">ISO<sub>m</sub>:</span>
+            <span data-i18n="formulaLegendMeterIso"></span>
+          </div>
+          <div
+            class="formula-paper-iso"
+            data-i18n="formulaLegendPaperIso"
+          ></div>
+        </div>
+        <p data-i18n="formulaExplanation"></p>
+        <p id="formula-example-intro"></p>
+        <div id="formula-example" class="formula-equation"></div>
+        <button
+          id="close-formula"
+          type="button"
+          class="language-button"
+          data-i18n="close"
+        >
+          Close
+        </button>
+      </div>
+    </dialog>
+    <dialog id="pinhole-dialog" aria-labelledby="pinhole-title">
+      <form id="pinhole-form">
+        <h2
+          id="pinhole-title"
+          class="title is-5"
+          data-i18n="pinholeCalculate"
+          tabindex="-1"
+          autofocus
+        ></h2>
+        <div class="field">
+          <label
+            class="label"
+            for="pinhole-diameter"
+            data-i18n="pinholeDiameter"
+          ></label>
+          <output id="pinhole-diameter-value" for="pinhole-diameter"></output>
+          <input
+            id="pinhole-diameter"
+            type="range"
+            min="0.1"
+            max="0.5"
+            step="0.01"
+            value="0.35"
+          />
+          <div class="slider-limits">
+            <span>0.1 mm</span><span>0.5 mm</span>
+          </div>
+        </div>
+        <div class="field">
+          <label
+            class="label"
+            for="pinhole-distance"
+            data-i18n="pinholeDistance"
+          ></label>
+          <input
+            id="pinhole-distance"
+            class="input"
+            type="number"
+            inputmode="decimal"
+            min="30"
+            max="300"
+            step="any"
+            required
+            aria-describedby="pinhole-distance-help"
+          />
+          <p
+            id="pinhole-distance-help"
+            class="help"
+            data-i18n="pinholeDistanceRange"
+          ></p>
+        </div>
+        <div id="pinhole-result-section" hidden>
+          <output
+            id="pinhole-result"
+            for="pinhole-diameter pinhole-distance"
+            aria-live="polite"
+            aria-atomic="true"
+          ></output>
+          <p data-i18n="pinholeEquation"></p>
+          <p id="pinhole-substitution"></p>
+        </div>
+        <button
+          id="pinhole-continue"
+          type="submit"
+          class="language-button"
+          data-i18n="continueButton"
+          disabled
+        >
+          Continue
+        </button>
+        <button
+          id="close-pinhole"
+          type="button"
+          class="language-button"
+          data-i18n="backButton"
+        >
+          Back
+        </button>
+      </form>
+    </dialog>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

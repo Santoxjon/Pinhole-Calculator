@@ -1,0 +1,264 @@
+#language-dialog,
+#pinhole-dialog,
+#formula-dialog {
+  margin: auto;
+  width: min(400px, calc(100% - 2rem));
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  padding: 1.5rem;
+  border: 1px solid #dfccb2;
+  border-radius: 16px;
+  background: #fff8e9;
+  color: #392b27;
+
+  &::backdrop {
+    background: #392b2780;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+  .title {
+    color: #b43d35;
+    margin-bottom: 0.75rem;
+  }
+  p {
+    color: #756052;
+    font-size: 0.9rem;
+  }
+
+  &[open] {
+    animation: dialog-enter 300ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  &[open]::backdrop {
+    animation: backdrop-enter 300ms ease-out both;
+  }
+  &.is-closing {
+    animation: dialog-leave 180ms ease-in both;
+    pointer-events: none;
+  }
+  &.is-closing::backdrop {
+    animation: backdrop-leave 180ms ease-in both;
+  }
+}
+
+@keyframes dialog-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes dialog-leave {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+@keyframes backdrop-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes backdrop-leave {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(#language-dialog, #formula-dialog, #pinhole-dialog)[open],
+  :is(#language-dialog, #formula-dialog, #pinhole-dialog)[open]::backdrop {
+    animation: none;
+  }
+}
+#language-options {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+#language-prompt {
+  white-space: pre-line;
+}
+#language-title:focus,
+#formula-title:focus {
+  outline: none;
+}
+#formula-dialog {
+  padding: 0.75rem 0;
+  overflow: hidden;
+
+  .formula-dialog-content {
+    max-height: calc(100dvh - 3.5rem - 2px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0.75rem 1.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: #bd9374 #fff8e9;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    &::-webkit-scrollbar-track {
+      background: #fff8e9;
+      border-radius: 999px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #bd9374;
+      border: 2px solid #fff8e9;
+      border-radius: 999px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: #9d6850;
+    }
+    > p,
+    > .formula-equation {
+      margin-top: 1rem;
+    }
+  }
+  .formula-legend {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem 1rem;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    .formula-symbol {
+      font-weight: 600;
+    }
+  }
+  .formula-description {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+  .formula-equation {
+    min-width: 0;
+    text-align: center;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    padding: 1rem;
+    border-radius: 8px;
+    background: #f5ecd9;
+    color: #8e302a;
+    overflow-x: auto;
+    font-weight: 400;
+    line-height: 1.7;
+    mjx-container {
+      display: block;
+      text-align: center !important;
+      margin: 0.5rem 0 !important;
+      pointer-events: none;
+    }
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+#close-formula {
+  margin-top: 1.25rem;
+  width: 100%;
+}
+.language-option {
+  justify-content: flex-start;
+  padding: 0.85rem 1rem;
+  border: 1px solid transparent;
+  font-size: 1.125rem;
+
+  &[aria-pressed='true'] {
+    border-color: #b43d35;
+  }
+  &:focus-visible {
+    outline: none;
+    background: #f3d0c2;
+  }
+}
+#close-language {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.pinhole-help {
+  display: inline;
+  color: #8e302a;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+#pinhole-dialog {
+  &,
+  * {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+  #pinhole-title:focus {
+    outline: none;
+  }
+  .field {
+    margin-top: 1.25rem;
+  }
+  input[type='range'] {
+    width: 100%;
+    accent-color: #8e302a;
+  }
+  .slider-limits {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+  }
+  #pinhole-diameter-value {
+    font-size: 1.125rem;
+  }
+  #pinhole-result {
+    display: block;
+    margin-top: 1.5rem;
+    color: #8e302a;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  #pinhole-continue {
+    width: 100%;
+    margin: 1.25rem 0 0.75rem;
+    background: #b43d35;
+    border-color: #b43d35;
+    color: #fff8e9;
+
+    &:hover:not(:disabled) {
+      background: #8e302a;
+      border-color: #8e302a;
+    }
+  }
+  #close-pinhole {
+    width: 100%;
+    border-color: #b43d35;
+    color: #b43d35;
+  }
+  #pinhole-continue:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
