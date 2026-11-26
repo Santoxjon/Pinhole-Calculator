@@ -48,4 +48,5 @@ export const es: Translation = {
   chooseLanguage: 'Elige tu idioma',
   close: 'Cerrar',
   meta: 'Una calculadora de exposición sencilla para fotografía estenopeica con papel ISO 6.',
+  footerAuthor: 'Creado por Jon Santos',
 };

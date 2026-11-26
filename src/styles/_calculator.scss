@@ -262,6 +262,23 @@ output.is-empty {
   line-height: 1.6;
   color: #756052;
 }
+.site-footer {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 1rem 2rem;
+  color: #756052;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  text-align: center;
+}
+.site-footer a {
+  color: #8e302a;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+.site-footer a:hover {
+  color: #b43d35;
+}
 
 .select:not(.is-multiple):not(.is-loading)::after {
   border-color: #b43d35;
