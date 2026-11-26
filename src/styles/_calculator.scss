@@ -279,6 +279,11 @@ output.is-empty {
 .site-footer a:hover {
   color: #b43d35;
 }
+.site-footer .app-version {
+  margin: 0;
+  color: #b43d35;
+  font-weight: 650;
+}
 
 .select:not(.is-multiple):not(.is-loading)::after {
   border-color: #b43d35;

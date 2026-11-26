@@ -4,6 +4,9 @@ import { createPinholeDialog } from './ui/pinhole-dialog';
 import { createCalculator } from './ui/calculator';
 import { createLanguagePicker } from './ui/language';
 import { createFormulaDialog } from './formula/dialog';
+import { version } from '../package.json';
+
+document.querySelector('#app-version')!.textContent = `v${version}`;
 
 const formula = createFormulaDialog();
 const language = createLanguagePicker(() => {
