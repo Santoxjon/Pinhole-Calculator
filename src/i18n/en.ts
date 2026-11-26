@@ -46,4 +46,5 @@ export const en = {
   chooseLanguage: 'Choose your language',
   close: 'Close',
   meta: 'A simple exposure calculator for pinhole photography with ISO 6 paper.',
+  footerAuthor: 'Created by Jon Santos',
 };

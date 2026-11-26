@@ -1,0 +1,122 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
+    runs-on: linux-arm64
+
+    steps:
+      - name: Download code
+        uses: https://data.forgejo.org/actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Build and test
+        run: bash deploy/build.sh
+
+  publish:
+    needs: build
+    runs-on: pinhole-deploy
+
+    outputs:
+      image: ${{ steps.publish.outputs.image }}
+
+    env:
+      REGISTRY: git.jonsantos.es
+      IMAGE_NAME: git.jonsantos.es/jon/pinhole-calculator
+
+    steps:
+      - name: Download code
+        uses: https://data.forgejo.org/actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Create temporary Docker credentials
+        run: echo "DOCKER_CONFIG=$(mktemp -d)" >> "$GITHUB_ENV"
+
+      - name: Log in to Forgejo Registry
+        env:
+          REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
+        run: |
+          printf '%s' "$REGISTRY_TOKEN" | docker login "$REGISTRY" \
+            --username jon \
+            --password-stdin
+
+      - name: Build and publish image
+        id: publish
+        run: |
+          set -euo pipefail
+
+          IMAGE_TAG="${GITHUB_REF_NAME}-${GITHUB_SHA}"
+          IMAGE="${IMAGE_NAME}:${IMAGE_TAG}"
+
+          docker build \
+            --platform linux/arm64 \
+            --tag "$IMAGE" \
+            .
+
+          docker push "$IMAGE"
+
+          DIGEST=$(docker image inspect \
+            --format '{{index .RepoDigests 0}}' "$IMAGE")
+
+          echo "image=$DIGEST" >> "$GITHUB_OUTPUT"
+          echo "Published $DIGEST"
+
+      - name: Remove temporary Docker credentials
+        if: always()
+        run: |
+          if [[ -n "${DOCKER_CONFIG:-}" ]]; then
+            rm -rf -- "$DOCKER_CONFIG"
+          fi
+
+  deploy:
+    needs: publish
+    runs-on: pinhole-deploy
+
+    env:
+      PINHOLE_IMAGE: ${{ needs.publish.outputs.image }}
+      PINHOLE_CONTAINER: ${{ github.ref_name == 'master' && 'pinhole' || 'pinhole-staging' }}
+      PINHOLE_PORT: ${{ github.ref_name == 'master' && '6000' || '6001' }}
+      NPM_NETWORK: ${{ vars.NPM_NETWORK }}
+
+    steps:
+      - name: Download deployment configuration
+        uses: https://data.forgejo.org/actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Create temporary Docker credentials
+        run: echo "DOCKER_CONFIG=$(mktemp -d)" >> "$GITHUB_ENV"
+
+      - name: Log in to Forgejo Registry
+        env:
+          REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
+        run: |
+          printf '%s' "$REGISTRY_TOKEN" | docker login git.jonsantos.es \
+            --username jon \
+            --password-stdin
+
+      - name: Deploy and check health
+        run: bash deploy/deploy.sh
+
+      - name: Remove temporary Docker credentials
+        if: always()
+        run: |
+          if [[ -n "${DOCKER_CONFIG:-}" ]]; then
+            rm -rf -- "$DOCKER_CONFIG"
+          fi

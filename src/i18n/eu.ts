@@ -49,4 +49,5 @@ export const eu: Translation = {
   chooseLanguage: 'Aukeratu zure hizkuntza',
   close: 'Itxi',
   meta: 'ISO 6 paperarekin argazki estenopeikoak egiteko esposizio-kalkulagailu erraza.',
+  footerAuthor: 'Jon Santosek egina',
 };
